@@ -8,6 +8,7 @@ Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://j
 
 hello this is a test it was very hot today
 
+$$\alpha$$
 
 Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
 
