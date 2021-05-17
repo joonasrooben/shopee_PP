@@ -144,7 +144,10 @@ a {
   margin-bottom: 2rem;
   font-weight: normal;
   opacity: 0.7;
-  border-style: solid;
+  background-color: white;
+  border-radius:5px;
+  margin-left:30%;
+  margin-right:30%;
 
   @include large {
     font-size: 1.25rem;
