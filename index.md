@@ -54,11 +54,11 @@ The second major part to solving the problem is dealing with the product descrip
   - TF-IDF
   - Doc2Vec
 
-We won't cover each point extensively, we'll explore in detail the best approach (fine-tuned BERT). We will also touch upon the other approaches and see why they weren't on top of the game.
+We won't cover each point extensively, we'll explore in detail the most interesting approaches (BERT and fine-tuned BERT) (that also did quite well). We will also touch upon the other approaches.
 
 <b><u>BERT & fine-tuning BERT</u></b> 
 <br>
-So as you might've guessed (or not), the best approach for extracting description embeddings was a fine-tuned BERT model. Now some of you may not know what BERT is or what it can do so here's a brief overview of BERT-like models.
+Now some of you may not know what BERT is or what it can do so here's a brief overview of BERT-like models.
 
 BERT is a pre-trained language model (PLM) (or language representation model). These are models trained in an unsupervised fashion on huge amounts of text by predicting masked words in sentences (and sometimes next sentence prediction - which is the case for BERT). These models learn to understand and represent language. A common architecture used today is the transformer architecture that uses the attention mechanism. As the model processes each word of the input sequence, attention allows the model to look at other words in the input sequence for clues that can help lead to a better encoding (or representation) for this word. The BERT architecture follows the following scheme (a stack of encoders- each encoder consisting of an attention mechanism layer a linear layer) [source](http://jalammar.github.io/illustrated-bert/)
 
@@ -76,22 +76,45 @@ So now you must be begging to know what task we fine-tuned BERT on ? Well idk lo
 
 ...
 
-As mentioned we also try two other models: TF-IDF and Word2Vec. These two model do not take attention and context into account and are much smaller than BERT but nevertheless they still produce great results and are highly efficient (🚨#spoiler🚨 Doc2Vec did the worst)
+As mentioned we also try two other models: TF-IDF and Word2Vec. These two model do not take attention and context into account and are much smaller than BERT but nevertheless they still produce great results and are much more efficient (🚨#spoiler🚨 but Doc2Vec did the worst)
 
-TF-IDF is a purely <b>statistical</b> approach. TF-IDF evaluates how relevant a word is to a document in a collection of documents. This is done by multiplying two metrics: how many times a word appears in a document (TF), and the inverse document frequency of the word across a set of documents (IDF). So no model trained in this case. For TF-IDF, at testing phase, we contruct a (HUGE) sparse TF-IDF matrix (so of dimensions ~ 60 000 x 30 000 #we're_gonna_need_more_ram) where each line is a document / description and each column is a term (feature). We then apply a dimensionality reduction algorithm to reduce the number of features from 30 000 to a more managable number. We now have our embeddings (each row of the matrix is an embedding).  
+TF-IDF is a purely <b>statistical</b> approach. TF-IDF evaluates how relevant a word is to a document in a collection of documents. This is done by multiplying two metrics: how many times a word appears in a document (TF), and the inverse document frequency of the word across a set of documents (IDF).
 
 Doc2vec is another neural approach to embeddings. It is based off and (very) similar to the famous Word2Vec model. To give a brief overview, Word2vec models train a simple neural net with one hidden layer to predict the next word in a sequence. Word2Vec is <b>NOT</b> contextual: there is only one unique embedding for each word in the vocabulary, full stop, unlike BERT where a word embedding depends on the other words around it. Doc2Vec is basically the same as Word2Vec with the only difference being a paragraph matrix added to the input. In practice we train a Doc2vec model on our training data.
 
-Here is a summary of the mean F1 scores (on training data) for each textual model using optimal threshold:
+Here is a summary of the mean F1 scores (on training data) for each textual model (<b>without</b> concatenation with image embeddings) using optimal threshold:
 
 |                 | Mean F1-score |
 |-----------------|---------------|
-| Fine-tuned BERT | 1             |
-| Just BERT       | 1             |
-| TF-IDF          | 1             |
-| Doc2Vec         | 1             |
+| Fine-tuned BERT | 59%          |
+| Just BERT       | 59%          |
+| TF-IDF          | <b>62%</b>          |
+| Doc2Vec         | 57%          |
 
 
+Here is a summary of the mean F1 scores (on training data) for each textual model (<b>with</b> concatenation with image embeddings) using optimal threshold:
+
+|                 | Mean F1-score |
+|-----------------|---------------|
+| Fine-tuned BERT | 85.1%         |
+| Just BERT       | <b>85.4%</b>         |
+| TF-IDF          | 84.8%          |
+| Doc2Vec         | 83%          |
+
+Now just hold on before you start doubting the power and effectiveness of BERT. As we can see, when using only the language models for matching, TF-IDF comes out on top! By a margin of 3%: a small but not insignificant difference between the BERT models (we can leave Doc2Vec out of the discussion at this point now).
+
+This suggests two things:
+  1. Never understimate the power of smaller simpler approaches such as TF-IDF. They deliver surprisingly good results!
+  2. Even when fine-tuned on the product descriptions, BERT still has a tough time grasping these short messy descriptions. This suggests BERT should be left to deal with "classical" language (proper sentences). A statistical approach seems to fit this problem better.
+
+Looking at the results when concatenating image and text embeddings, un-fine-tuned BERT comes out on top with a very small margin of 0.3% over fine-tuned BERT. The margins aren't huge between all models (maximum 2%). 
+
+We can form a few hypotheses from all these results.
+  - Textual information doesn't help much (only improves the F1 score by 1% (note that when only using image models we get F1 of 84.0%)) 
+  - We weren't combining the two embeddings together in the right way (we used concatenation)
+  - We used the wrong models
+  - we didn't fine-tune BERT in the right way or for long enough
+  
 ## The Endgame
 
 ## 3rd vs 1st place
