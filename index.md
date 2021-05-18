@@ -95,22 +95,78 @@ Doc2vec is another neural approach to embeddings. It is based off and (very) sim
 
 Here is a summary of the mean F1 scores (on training data) for each textual model (<b>without</b> concatenation with image embeddings) using optimal threshold:
 
-|                 | Mean F1-score |
-|-----------------|---------------|
-| Fine-tuned BERT | 59%          |
-| Just BERT       | 59%          |
-| TF-IDF          | <b>62%</b>          |
-| Doc2Vec         | 57%          |
-
+<style type="text/css">
+.tg  {border:none;border-collapse:collapse;border-color:#ccc;border-spacing:0; text-align:center;}
+.tg td{background-color:#fff;border-color:#ccc;border-style:solid;border-width:0px;color:#333;
+  font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{background-color:#f0f0f0;border-color:#ccc;border-style:solid;border-width:0px;color:#333;
+  font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+.tg .tg-btxf{background-color:#f9f9f9;border-color:inherit;text-align:left;vertical-align:top}
+</style>
+<table class="tg" >
+<thead>
+  <tr>
+    <th class="tg-0pky"></th>
+    <th class="tg-0pky">Mean F1-score</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-btxf">Fine-tuned BERT</td>
+    <td class="tg-btxf">59%<br></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Just BERT</td>
+    <td class="tg-0pky">59%</td>
+  </tr>
+  <tr>
+    <td class="tg-btxf">TF-IDF</td>
+    <td class="tg-btxf"><b>62%</b></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Doc2Vec</td>
+    <td class="tg-0pky">57%</td>
+  </tr>
+</tbody>
+</table>
 
 Here is a summary of the mean F1 scores (on training data) for each textual model (<b>with</b> concatenation with image embeddings) using optimal threshold:
-
-|                 | Mean F1-score |
-|-----------------|---------------|
-| Fine-tuned BERT | 85.1%         |
-| Just BERT       | <b>85.4%</b>         |
-| TF-IDF          | 84.8%          |
-| Doc2Vec         | 83%          |
+<style type="text/css" >
+.tg  {border:none;border-collapse:collapse;border-color:#ccc;border-spacing:0; text-align:center;}
+.tg td{background-color:#fff;border-color:#ccc;border-style:solid;border-width:0px;color:#333;
+  font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{background-color:#f0f0f0;border-color:#ccc;border-style:solid;border-width:0px;color:#333;
+  font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+.tg .tg-btxf{background-color:#f9f9f9;border-color:inherit;text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-0pky"></th>
+    <th class="tg-0pky">Mean F1-score</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-btxf">Fine-tuned BERT</td>
+    <td class="tg-btxf">85.1%<br></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Just BERT</td>
+    <td class="tg-0pky"><b>85.4%</b></td>
+  </tr>
+  <tr>
+    <td class="tg-btxf">TF-IDF</td>
+    <td class="tg-btxf">84.8%</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Doc2Vec</td>
+    <td class="tg-0pky">83%</td>
+  </tr>
+</tbody>
+</table>
 
 <b>Now just hold on before you start doubting the power and effectiveness of BERT 🚨</b>. As we can see, when using only the language models for matching, TF-IDF comes out on top 🤯 ! By a margin of 3%: a small but not insignificant difference between the BERT models (we can leave Doc2Vec out of the discussion at this point now).
 
