@@ -96,7 +96,7 @@ Doc2vec is another neural approach to embeddings. It is based off and (very) sim
 Here is a summary of the mean F1 scores (on training data) for each textual model (<b>without</b> concatenation with image embeddings) using optimal threshold:
 
 <style type="text/css">
-.tg  {border:none;border-collapse:collapse;border-color:#ccc;border-spacing:0; text-align:center;}
+.tg  {border:none;border-collapse:collapse;border-color:#ccc;border-spacing:0;}
 .tg td{background-color:#fff;border-color:#ccc;border-style:solid;border-width:0px;color:#333;
   font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;word-break:normal;}
 .tg th{background-color:#f0f0f0;border-color:#ccc;border-style:solid;border-width:0px;color:#333;
@@ -104,7 +104,7 @@ Here is a summary of the mean F1 scores (on training data) for each textual mode
 .tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
 .tg .tg-btxf{background-color:#f9f9f9;border-color:inherit;text-align:left;vertical-align:top}
 </style>
-<table class="tg" >
+<table class="tg center">
 <thead>
   <tr>
     <th class="tg-0pky"></th>
@@ -133,7 +133,7 @@ Here is a summary of the mean F1 scores (on training data) for each textual mode
 
 Here is a summary of the mean F1 scores (on training data) for each textual model (<b>with</b> concatenation with image embeddings) using optimal threshold:
 <style type="text/css" >
-.tg  {border:none;border-collapse:collapse;border-color:#ccc;border-spacing:0; text-align:center;}
+.tg  {border:none;border-collapse:collapse;border-color:#ccc;border-spacing:0;}
 .tg td{background-color:#fff;border-color:#ccc;border-style:solid;border-width:0px;color:#333;
   font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;word-break:normal;}
 .tg th{background-color:#f0f0f0;border-color:#ccc;border-style:solid;border-width:0px;color:#333;
@@ -141,7 +141,7 @@ Here is a summary of the mean F1 scores (on training data) for each textual mode
 .tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
 .tg .tg-btxf{background-color:#f9f9f9;border-color:inherit;text-align:left;vertical-align:top}
 </style>
-<table class="tg">
+<table class="tg center">
 <thead>
   <tr>
     <th class="tg-0pky"></th>
