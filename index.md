@@ -1,3 +1,15 @@
+
+<style type="text/css">
+.center {margin-left: auto; margin-right: auto;}
+.tg  {border:none;border-collapse:collapse;border-color:#ccc;border-spacing:0;}
+.tg td{background-color:#fff;border-color:#ccc;border-style:solid;border-width:0px;color:#333;
+  font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{background-color:#f0f0f0;border-color:#ccc;border-style:solid;border-width:0px;color:#333;
+  font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+.tg .tg-btxf{background-color:#f9f9f9;border-color:inherit;text-align:left;vertical-align:top}
+</style>
+
 # *Shopee* **Price Police**
 
 <i>How to detect if two products are the same by their images and descriptions with the help of embeddings.</i>
@@ -95,15 +107,6 @@ Doc2vec is another neural approach to embeddings. It is based off and (very) sim
 
 Here is a summary of the mean F1 scores (on training data) for each textual model (<b>without</b> concatenation with image embeddings) using optimal threshold:
 
-<style type="text/css">
-.tg  {border:none;border-collapse:collapse;border-color:#ccc;border-spacing:0;}
-.tg td{background-color:#fff;border-color:#ccc;border-style:solid;border-width:0px;color:#333;
-  font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;word-break:normal;}
-.tg th{background-color:#f0f0f0;border-color:#ccc;border-style:solid;border-width:0px;color:#333;
-  font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
-.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
-.tg .tg-btxf{background-color:#f9f9f9;border-color:inherit;text-align:left;vertical-align:top}
-</style>
 <table class="tg center">
 <thead>
   <tr>
@@ -132,15 +135,7 @@ Here is a summary of the mean F1 scores (on training data) for each textual mode
 </table>
 
 Here is a summary of the mean F1 scores (on training data) for each textual model (<b>with</b> concatenation with image embeddings) using optimal threshold:
-<style type="text/css" >
-.tg  {border:none;border-collapse:collapse;border-color:#ccc;border-spacing:0;}
-.tg td{background-color:#fff;border-color:#ccc;border-style:solid;border-width:0px;color:#333;
-  font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;word-break:normal;}
-.tg th{background-color:#f0f0f0;border-color:#ccc;border-style:solid;border-width:0px;color:#333;
-  font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
-.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
-.tg .tg-btxf{background-color:#f9f9f9;border-color:inherit;text-align:left;vertical-align:top}
-</style>
+
 <table class="tg center">
 <thead>
   <tr>
