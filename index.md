@@ -34,9 +34,23 @@ And of course in typical Kaggle fashion, the test set is hidden. Because otherwi
 
 ## Masterplan
 
+<b><u>General Approach:</u></b> It's first best to explain are general approach to the problem at hand. We first contruct an embedding for the whole description combining image and text. Here is a diagram explaining the situation because let's be honest diagrams are just better than textual descriptions.
+
+<div style="text-align:center"><img src="emb_diagram.png" alt="emb_diagram" class="center" height="500"></div>
+
+Then to determine if two postings match:
+
 ### Images
 
 ### Text
+
+The second major part to solving the problem is dealing with the product descriptions. It's nice having the image embeddings but using description embeddings can also help us in finding similar postings. Two postings with similar descriptions are likely to represent the same product. We tried many approaches to extract description embeddings:
+  - fine-tuned BERT
+  - Just BERT
+  - TF-IDF
+  - Doc2Vec
+
+Let's dive into each of these approaches and see which ones worked, which ones didn't, which ones were efficient and which ones were sadly not.
 
 ## The Endgame
 
