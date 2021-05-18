@@ -56,7 +56,7 @@ The second major part to solving the problem is dealing with the product descrip
 
 We won't cover each point extensively, we'll explore in detail the best approach (fine-tuned BERT). We will also touch upon the other approaches and see why they weren't on top of the game.
 
-<b><u>BERT & fine-tuning BERT</b></u> 
+<b><u>BERT & fine-tuning BERT</u></b> 
 <br>
 So as you might've guessed (or not), the best approach for extracting description embeddings was a fine-tuned BERT model. Now some of you may not know what BERT is or what it can do so here's a brief overview of BERT-like models.
 
@@ -71,6 +71,7 @@ So one approach to extracting description embeddings is to simply pass each desc
 Another but more interesting approach is to fine-tune BERT on our training data. Now the useful thing about PLMs is that they can be fine-tuned to any supervised learning task end-to-end. Meaning we can alter and hence "fine-tune" the pre-trained weights of BERT to teach BERT to be more accustomed to our data, to grasp a better understanding of the data at hand. BERT was pre-trained on wikipedia-like data and our data is messy descriptions: BERT alone won't understand the descriptions very well and won't get us optimal embeddings.
 
 So now you must be begging to know what task we fine-tuned BERT on ? Well idk lol
+<br>
 **Joonas take over here plz**
 
 ...
@@ -79,6 +80,7 @@ As mentioned we also try two other models: TF-IDF and Word2Vec. These two model 
 
 TF-IDF is a purely <b>statistical</b> approach. TF-IDF evaluates how relevant a word is to a document in a collection of documents. This is done by multiplying two metrics: how many times a word appears in a document (TF), and the inverse document frequency of the word across a set of documents (IDF). So no model trained in this case. For TF-IDF, at testing phase, we contruct a (HUGE) sparse TF-IDF matrix (so of dimensions ~ 60 000 x 30 000 #we're_gonna_need_more_ram) where each line is a document / description and each column is a term (feature). We then apply a dimensionality reduction algorithm to reduce the number of features from 30 000 to a more managable number. We now have our embeddings (each row of the matrix is an embedding).  
 
+Doc2vec is another neural approach to embeddings. It is based off and (very) similar to the famous Word2Vec model. To give a brief overview, Word2vec models train a simple neural net with one hidden layer to predict the next word in a sequence. Word2Vec is <b>NOT</b> contextual: there is only one unique embedding for each word in the vocabulary, full stop, unlike BERT where a word embedding depends on the other words around it. Doc2Vec is basically the same as Word2Vec with the only difference being a paragraph matrix added to the input. In practice we train a Doc2vec model on our training data.
 
 Here is a summary of the mean F1 scores (on training data) for each textual model using optimal threshold:
 
