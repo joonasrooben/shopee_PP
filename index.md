@@ -1,7 +1,6 @@
+<div style="text-align:center"><img src="blog_meme.jpg" alt="meme" class="center" height="300"></div>
 
 # *Shopee* **Price Police**
-
-<div style="text-align:center"><img src="blog_meme.jpg" alt="meme" class="center" height="300"></div>
 
 ## Background & Task
 
