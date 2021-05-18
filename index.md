@@ -1,19 +1,19 @@
-## *Shopee* **Price Police**
+ <img src="blog_meme.jpg" alt="meme"> 
 
-<h1>This is a test</h1
+# *Shopee* **Price Police**
 
-### Background & Task
+## Background & Task
 
-### Masterplan
+## Masterplan
 
-#### Images
+### Images
 
-#### Text
+### Text
 
-### The Endgame
+## The Endgame
 
-### 3rd vs 1st place
+## 3rd vs 1st place
 
-### Discussion
+## Discussion
 
 i.e what we learned and such
