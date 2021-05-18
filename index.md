@@ -38,7 +38,10 @@ And of course in typical Kaggle fashion, the test set is hidden. Because otherwi
 
 <div style="text-align:center"><img src="emb_diagram.png" alt="emb_diagram" class="center" height="500"></div>
 
-Then to determine if two postings match:
+Then to determine all matches for a posting:
+
+<div style="text-align:center"><img src="process_scheme.png" alt="prcess" class="center" height="500"></div>
+
 
 ### Images
 
