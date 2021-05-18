@@ -1,4 +1,4 @@
- <img src="blog_meme.jpg" alt="meme" class="center" width="200" height="300"> 
+ <div style="text-align:center"><img src="blog_meme.jpg" alt="meme" class="center" height="250"></div>
 
 # *Shopee* **Price Police**
 
