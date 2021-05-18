@@ -34,26 +34,61 @@ And of course in typical Kaggle fashion, the test set is hidden. Because otherwi
 
 ## Masterplan
 
-<b><u>General Approach:</u></b> It's first best to explain are general approach to the problem at hand. We first contruct an embedding for the whole description combining image and text. Here is a diagram explaining the situation because let's be honest diagrams are just better than textual descriptions.
+<b><u>General Approach / Pipeline :</u></b> It's first best to explain are general approach to the problem at hand. For each posting we start by contructing an embedding for the whole posting combining image and text. Here is a diagram explaining the situation because let's be honest diagrams are just better than textual descriptions.
 
 <div style="text-align:center"><img src="emb_diagram.png" alt="emb_diagram" class="center" height="500"></div>
 
-Then to determine all matches for a posting:
+Once we have our embeddings for each posting we can proceed onto matching them. The following diagram show how to determine all matches for a posting. In this example we're matching all similar postings to posting 312.
 
 <div style="text-align:center"><img src="process_scheme.png" alt="prcess" class="center" height="500"></div>
 
+The previous diagrams simply present our pipeline for finding similar products and well you might now be asking yourselves <b>hOw dO wE ExTrAcT tHeSe "EmBedDiNgS"??</b>. This is where the fun begins and Deep Learning finally arrives into the picture. In the next part of this blog we explore how we extract the image and text embeddings with help from neural networks.  
 
 ### Images
 
 ### Text
 
-The second major part to solving the problem is dealing with the product descriptions. It's nice having the image embeddings but using description embeddings can also help us in finding similar postings. Two postings with similar descriptions are likely to represent the same product. We tried many approaches to extract description embeddings:
+The second major part to solving the problem is dealing with the product descriptions. It's nice having the image embeddings but using description embeddings can also help us in finding similar postings. Two postings with similar descriptions are likely to represent the same product. We try many approaches to extract description embeddings:
   - fine-tuned BERT
   - Just BERT
   - TF-IDF
   - Doc2Vec
 
-Let's dive into each of these approaches and see which ones worked, which ones didn't, which ones were efficient and which ones were sadly not.
+We won't cover each point extensively, we'll explore in detail the best approach (fine-tuned BERT). We will also touch upon the other approaches and see why they weren't on top of the game.
+
+<b><u>BERT & fine-tuning BERT</b></u> 
+<br>
+So as you might've guessed (or not), the best approach for extracting description embeddings was a fine-tuned BERT model. Now some of you may not know what BERT is or what it can do so here's a brief overview of BERT-like models.
+
+BERT is a pre-trained language model (PLM) (or language representation model). These are models trained in an unsupervised fashion on huge amounts of text by predicting masked words in sentences (and sometimes next sentence prediction - which is the case for BERT). These models learn to understand and represent language. A common architecture used today is the transformer architecture that uses the attention mechanism. As the model processes each word of the input sequence, attention allows the model to look at other words in the input sequence for clues that can help lead to a better encoding (or representation) for this word. The BERT architecture follows the following scheme (a stack of encoders- each encoder consisting of an attention mechanism layer a linear layer) [source](http://jalammar.github.io/illustrated-bert/)
+
+<div style="text-align:center"><img src="bert_scheme.png" alt="bert" class="center" height="250"></div>
+
+So BERT takes as input a sequence and outputs a contextualized embedding that representing the whole sequence and contextualized embeddings for each separate token.
+
+So one approach to extracting description embeddings is to simply pass each description through BERT and get an embedding (of length 768).
+
+Another but more interesting approach is to fine-tune BERT on our training data. Now the useful thing about PLMs is that they can be fine-tuned to any supervised learning task end-to-end. Meaning we can alter and hence "fine-tune" the pre-trained weights of BERT to teach BERT to be more accustomed to our data, to grasp a better understanding of the data at hand. BERT was pre-trained on wikipedia-like data and our data is messy descriptions: BERT alone won't understand the descriptions very well and won't get us optimal embeddings.
+
+So now you must be begging to know what task we fine-tuned BERT on ? Well idk lol
+**Joonas take over here plz**
+
+...
+
+As mentioned we also try two other models: TF-IDF and Word2Vec. These two model do not take attention and context into account and are much smaller than BERT but nevertheless they still produce great results and are highly efficient (🚨#spoiler🚨 Doc2Vec did the worst)
+
+TF-IDF is a purely <b>statistical</b> approach. TF-IDF evaluates how relevant a word is to a document in a collection of documents. This is done by multiplying two metrics: how many times a word appears in a document (TF), and the inverse document frequency of the word across a set of documents (IDF). So no model trained in this case. For TF-IDF, at testing phase, we contruct a (HUGE) sparse TF-IDF matrix (so of dimensions ~ 60 000 x 30 000 #we're_gonna_need_more_ram) where each line is a document / description and each column is a term (feature). We then apply a dimensionality reduction algorithm to reduce the number of features from 30 000 to a more managable number. We now have our embeddings (each row of the matrix is an embedding).  
+
+
+Here is a summary of the mean F1 scores (on training data) for each textual model using optimal threshold:
+
+|                 | Mean F1-score |
+|-----------------|---------------|
+| Fine-tuned BERT | 1             |
+| Just BERT       | 1             |
+| TF-IDF          | 1             |
+| Doc2Vec         | 1             |
+
 
 ## The Endgame
 
