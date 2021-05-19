@@ -46,9 +46,18 @@ The previous diagrams simply present our pipeline for finding similar products a
 
 ### Images
 
+Firstly, lets dig into the process of extracting image embeddings. Let's just assume that we have some kind of neural network(NN) model X. The main idea behind the extraction lays in the very essence of the NN's themselves. Each further layer of the network will learn to represent new features of the input. So, in the very end, before the output unit, we should have the input represented in the best form for the task the model X is trained. That is the place, if we want to get the input's best representation in the task, where we take those representations i.e embeddings or sometimes called feature vectors of the input. In other words we get the embeddings just after the last hidden layer.
+
+<div style="text-align:center"><img src="img-embs.png" alt="prcess" class="center" height="500"></div>
+
+Let's get more precise now. We tried out two major image classification models:
+
+- EfficientNetB0
+- EfficientNetB3
+
 ### Text
 
-The second major part to solving the problem is dealing with the product descriptions. It's nice having the image embeddings but using description embeddings can also help us in finding similar postings. Two postings with similar descriptions are likely to represent the same product. We try many approaches to extract description embeddings:
+The second major part to solving the problem is dealing with the product descriptions. It's nice having the image embeddings but using description embeddings can also help us in finding similar postings. Two postings with similar descriptions are likely to represent the same product. We tried many approaches to extract description embeddings:
   - fine-tuned BERT
   - Just BERT
   - TF-IDF (#underrated)
@@ -88,7 +97,7 @@ TF-IDF is a purely <b>statistical</b> approach. TF-IDF evaluates how relevant a 
 
 <b><u>Doc2Vec</u></b> 
 <br>
-Doc2vec is another neural approach to embeddings. It is based off and (very) similar to the famous Word2Vec model. To give a brief overview, Word2vec models train a simple neural net with one hidden layer to predict the next word in a sequence. Word2Vec is <b>NOT</b> contextual: there is only one unique embedding for each word in the vocabulary, full stop, unlike BERT where a word embedding depends on the other words around it. Doc2Vec is basically the same as Word2Vec with the only difference being a paragraph matrix added to the input. In practice we train a Doc2vec model on our training data.
+Doc2vec is another neural approach to embeddings. It is based of and (very) similar to the famous Word2Vec model. To give a brief overview, Word2vec models train a simple neural net with one hidden layer to predict the next word in a sequence. Word2Vec is <b>NOT</b> contextual: there is only one unique embedding for each word in the vocabulary, full stop, unlike BERT where a word embedding depends on the other words around it. Doc2Vec is basically the same as Word2Vec with the only difference being a paragraph matrix added to the input. In practice we train a Doc2vec model on our training data.
 
 <b><u>Some (interesting but somewhat concerning 😐) results</u></b> 
 <br>
