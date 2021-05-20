@@ -76,22 +76,27 @@ After we had succeeded in it, we fell in temtation to try out bigger models. So,
 
 One thing that was really bothering us, was the slight touch of overfitting at every submission and the possible overcomplication of the embeddings. As B0 net embeddings were of size of 1280 and B3 already 1536, it seemed like a possible area of improvement. The regularization that proved best and were fastest, was PCA i.e principal component analysis. Usually we set the PCA to output number of components so, that the result would explain 75% or 90% of the variance among the inputted embeddings. The PCA has a nice attribute of `whiten` as well. This ensure uncorrelated outputs with unit component-wise variances which imporved our model even more.
 
-<b><u>Arcface layer</u></b>
+<b><u>Arcface i.e Additive Angular Margin Loss </u></b>
 
+Obviously, we want the similar postings' embeddings to be close to each other in relation to cosine similarity and dissimilar ones to be far from each other in the vector space. Therefore, instead of the softmax, Additive Angular Margin Loss is the solution. The Arcface was first introduced in paper [ArcFace: Additive Angular Margin Loss for Deep Face Recognition](https://arxiv.org/pdf/1801.07698v3.pdf)[[1]](#1). It will add an angular margin penalty between the weights and input, so to force the distance between dissimilar classes to be longer. The figure below illustrates it (figure is from [[1]](#1)):
 
+<div style="text-align:center"><img src="arc_face.png" alt="prcess" class="center" height="500"></div>
+
+The class `ArcMarginProduct` that was used in our solution was adapted from [ragnar's notebook](https://www.kaggle.com/rooben/img-baseline?scriptVersionId=63066660).
 
 <b><u>EfficientNetB3 and fine-tuning it</u></b>
 
-Fine-tuning the weights had to be tried out. So, 
-
+Fine-tuning the weights had to be tried out. We did it twice- first time we overfit it too much and the result did not improve. Second time, the stopping of the training were more on point and the results were impressive. The training were done using the ArcFace loss and was set up as a classification task with 11 014 classes.
 
 <b><u>Results</u></b>
+
+After all the different approaches and strategies with image embeddings, here is the summary of the mean F1 scores (on training data) using optimal thresholds.
 
 <table class="tg center">
 <thead>
   <tr>
     <th class="tg-0pky"></th>
-    <th class="tg-0pky">Mean F1-score/train</th>
+    <th class="tg-0pky">Mean F1-score</th>
   </tr>
 </thead>
 <tbody>
@@ -105,7 +110,7 @@ Fine-tuning the weights had to be tried out. So,
   </tr>
   <tr>
     <td class="tg-btxf">EfficientNetB0 + PCA</td>
-    <td class="tg-btxf"><b>68.7%</b></td>
+    <td class="tg-btxf">68.7%</td>
   </tr>
   <tr>
     <td class="tg-0pky">B3 + ArcFace</td>
@@ -122,7 +127,13 @@ Fine-tuning the weights had to be tried out. So,
 </tbody>
 </table>
 
+We can see that fine-tuning eventually got us a remarkable leap in scores and that PCA was now part of the deafault package 😃. 
+
 <b><u>Major time waster i.e how to build a fast data loading pipeline</u></b>
+
+One thing that really hindered our process was the speed of data loading. Every time we wanted to develope the notebook, we had to load the images. It was super time consuming- in average it took 40 minutes every time to laod all the training images. Our loading pipeline seemed good and no obvious thing would have made it faster. One solution, that was widely used by other participants, was using TFRecords. "The TFRecord format is a simple format for storing a sequence of binary records" as stated in [Tensorflow homepage](https://www.tensorflow.org/tutorials/load_data/tfrecord). This would vanish the issue of import speed but in case of test data- it would not help us- we would still need to use the ordinary pipeline as the data will be given as images. After checking out some open notebooks, it occured that the popular solution was to use batches of images instead of calculating the embeddings for each image separately 😏.
+
+A takeway: **Use batches!** - a great helper in that case is a `tf.data.Dataset` class.
 
 ### Text
 
@@ -272,6 +283,11 @@ i.e what we learned and such
 * Kaggle cannot be the bread and butter of a data scientist but is a perfect opportunity to know the latest trends in ML and learn something practical and new. Full hands on experience in ML.
 * got a chance to fine-tune
 * no internet
+* late joining
+
+## References
+<a id="1">[1]</a> 
+Jiankang Deng and Jia Guo and Stefanos Zafeiriou. (2018). ArcFace: Additive Angular Margin Loss for Deep Face Recognition. abs/1801.07698. CoRR.
 
 
 
