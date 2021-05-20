@@ -331,7 +331,65 @@ The bolded row was fixed as our final submission because we could not get the im
 
 In general we made 43 submissions and ranked 2012 out of 2426 teams which is not so bad result taking into account that we joined the competition close to merger.
 
-## 3rd vs 1st place
+## Winning vs 6th place strategy
+
+As the competition ended and the winners publiced their solutions, let's check them out as well. We have chosen to look more closely the 1st and 6th place solutions. They are remarkably different in complexity and show well how differently this problem could be approached.
+
+### 1st place *YoonSoo*
+
+**From Embeddings to Matches** 
+
+<table class="tg center">
+<thead>
+  <tr>
+    <th class="tg-0pky">Strategy </th>
+    <th class="tg-0pky">Test mean F1-score </th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-btxf">baseline</td>
+    <td class="tg-btxf">0.7(image only), 0.64(text only)<br></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">concat img_emb & txt_emb -> normalize</td>
+    <td class="tg-0pky">0.724</td>
+  </tr>
+  <tr>
+    <td class="tg-btxf">min2</td>
+    <td class="tg-btxf">0.743</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">normalize -> concat img_emb & txt_emb</td>
+    <td class="tg-0pky"> 0.753</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">full data training</td>
+    <td class="tg-0pky">0.757</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">union comb, img, txt matches & tune threshold</td>
+    <td class="tg-0pky">0.776</td>
+  </tr>
+    <tr>
+    <td class="tg-0pky">INB & add diverse txt models</td>
+    <td class="tg-0pky">0.784</td>
+  </tr>
+    <tr>
+    <td class="tg-0pky">use img, txt, comb emb at INB stage 1 & tune threshold jointly</td>
+    <td class="tg-0pky">0.793</td>
+  </tr>
+</tbody>
+</table>
+
+### 3rd place *kurupical*
+
+
+
+
+
+
+
 
 ## Discussion
 
