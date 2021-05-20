@@ -54,6 +54,75 @@ Let's get more precise now. We tried out two major image classification models:
 
 - EfficientNetB0
 - EfficientNetB3
+- fine-tuned EfficientNetB3 
+
+<b><u>EfficientNet</u></b>
+
+EfficientNet was first introduced by [Tan and Le, 2019](https://arxiv.org/abs/1905.11946) and is one of the most efficient models that reaches the-state-of-art accuracy on the *imagenet* tasks. We used *Keras* implementation of EfficientNet.
+
+<div style="text-align:center"><img src="params.png" alt="prcess" class="center" height="500"></div>
+
+We can see from the [source](https://github.com/tensorflow/tpu/blob/master/models/official/efficientnet/g3doc/params.png) graph that B0 has least parameters and worst accuracy and B7 is the biggest model with the best accuracy as well. So, as bigger models take more resources we decided to start small i.e with B0 model. Then, as we made it work, moved on to B3. 
+
+Firstly, we did not fine-tune but tried to get the whole pipeline in place- to create the baseline notebook that loads the images, creates the embeddings and predicts the matches. So, we loaded the EfficientNetB0 with *imagenet* weights.
+
+```
+from efficientnet.tfkeras import EfficientNetB0
+model = EfficientNetB0(weights='imagenet', include_top=False, pooling="max")
+```
+After we had succeeded in it, we fell in temtation to try out bigger models. So, we tried EfficientNetB3. This, unfortunately, did not provide any better accuracy. Potentially it should have better accuracy and we decided to continue developing with B3 model. 
+
+<b><u>PCA i.e principal component analysis</u></b>
+
+One thing that was really bothering us, was the slight touch of overfitting at every submission and the possible overcomplication of the embeddings. As B0 net embeddings were of size of 1280 and B3 already 1536, it seemed like a possible area of improvement. The regularization that proved best and were fastest, was PCA i.e principal component analysis. Usually we set the PCA to output number of components so, that the result would explain 75% or 90% of the variance among the inputted embeddings. The PCA has a nice attribute of `whiten` as well. This ensure uncorrelated outputs with unit component-wise variances which imporved our model even more.
+
+<b><u>Arcface layer</u></b>
+
+
+
+<b><u>EfficientNetB3 and fine-tuning it</u></b>
+
+Fine-tuning the weights had to be tried out. So, 
+
+
+<b><u>Results</u></b>
+
+<table class="tg center">
+<thead>
+  <tr>
+    <th class="tg-0pky"></th>
+    <th class="tg-0pky">Mean F1-score/train</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-btxf">EfficientNetB0</td>
+    <td class="tg-btxf">67%<br></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">EfficientNetB3</td>
+    <td class="tg-0pky">67%</td>
+  </tr>
+  <tr>
+    <td class="tg-btxf">EfficientNetB0 + PCA</td>
+    <td class="tg-btxf"><b>68.7%</b></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">B3 + ArcFace</td>
+    <td class="tg-0pky">67.5%</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">fine-tuned B3 + ArcFace + PCA</td>
+    <td class="tg-0pky">79%</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">fine-tuned v2 B3 + ArcFace + PCA</td>
+    <td class="tg-0pky">86.8%</td>
+  </tr>
+</tbody>
+</table>
+
+<b><u>Major time waster i.e how to build a fast data loading pipeline</u></b>
 
 ### Text
 
@@ -189,9 +258,21 @@ We can form a few hypotheses from all these results.
   - we didn't fine-tune BERT in the right way or for long enough
   
 ## The Endgame
+* GMM- too many classes
+* PCA + whiten
+* improvement + strategy
 
 ## 3rd vs 1st place
 
 ## Discussion
 
 i.e what we learned and such
+* initially tried to face the challenge our own
+* helpful postis in the Kaggle community
+* Kaggle cannot be the bread and butter of a data scientist but is a perfect opportunity to know the latest trends in ML and learn something practical and new. Full hands on experience in ML.
+* got a chance to fine-tune
+* no internet
+
+
+
+
