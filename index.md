@@ -331,9 +331,9 @@ The bolded row was fixed as our final submission because we could not get the im
 
 In general we made 43 submissions and ranked 2012 out of 2426 teams which is not so bad result taking into account that we joined the competition close to merger.
 
-## Winning vs 6th place strategy
+## Winning strategy
 
-As the competition ended and the winners publiced their solutions, let's check them out as well. We have chosen to look more closely the 1st and 6th place solutions. They are remarkably different in complexity and show well how differently this problem could be approached.
+As the competition ended and the winners published their solutions, let's check the winning solution.
 
 ### 1st place *YoonSoo*
 
@@ -348,11 +348,11 @@ As the competition ended and the winners publiced their solutions, let's check t
 </thead>
 <tbody>
   <tr>
-    <td class="tg-btxf">baseline</td>
+    <td class="tg-btxf">Baseline</td>
     <td class="tg-btxf">0.7(image only), 0.64(text only)<br></td>
   </tr>
   <tr>
-    <td class="tg-0pky">concat img_emb & txt_emb -> normalize</td>
+    <td class="tg-0pky">img_emb + txt_emb -> normalize</td>
     <td class="tg-0pky">0.724</td>
   </tr>
   <tr>
@@ -360,7 +360,7 @@ As the competition ended and the winners publiced their solutions, let's check t
     <td class="tg-btxf">0.743</td>
   </tr>
   <tr>
-    <td class="tg-0pky">normalize -> concat img_emb & txt_emb</td>
+    <td class="tg-0pky">normalize -> concat img_emb + txt_emb</td>
     <td class="tg-0pky"> 0.753</td>
   </tr>
   <tr>
@@ -368,28 +368,25 @@ As the competition ended and the winners publiced their solutions, let's check t
     <td class="tg-0pky">0.757</td>
   </tr>
   <tr>
-    <td class="tg-0pky">union comb, img, txt matches & tune threshold</td>
+    <td class="tg-0pky">union comb, img, txt matches + tune threshold</td>
     <td class="tg-0pky">0.776</td>
   </tr>
     <tr>
-    <td class="tg-0pky">INB & add diverse txt models</td>
+    <td class="tg-0pky">INB + add diverse txt models</td>
     <td class="tg-0pky">0.784</td>
   </tr>
     <tr>
-    <td class="tg-0pky">use img, txt, comb emb at INB stage 1 & tune threshold jointly</td>
+    <td class="tg-0pky">use img, txt, comb emb at INB stage 1 + tune threshold jointly</td>
     <td class="tg-0pky">0.793</td>
   </tr>
 </tbody>
 </table>
 
-### 3rd place *kurupical*
+Image embeddings were taken from ArcFace fine tuned *eca_nfnet_l1*. Text embeddings were from 5 different BERT pretrained models. The resulted embeddings were concatenate and then from those, text matches and image matches the union were taken. INB(Iterative Neighborhood Blending) is a pipeline of different elements that search for matches. It consists of KNN, min2 and neighbourhood blending. Min2 ensures that there are at least 2 matches per query. Neigbourhood blending is their own invented method to make embedding clusters more clear.
 
+We see that there a some fuzzy approaches but in general very neat and beautiful solution. The other ones e.g 3rd, 2nd place solutions were much more complicated and did not seem so neat.
 
-
-
-
-
-
+For further detail click [here](https://www.kaggle.com/c/shopee-product-matching/discussion/238136).
 
 ## Discussion
 
