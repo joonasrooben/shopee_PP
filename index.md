@@ -80,7 +80,7 @@ One thing that was really bothering us, was the slight touch of overfitting at e
 
 Obviously, we want the similar postings' embeddings to be close to each other in relation to cosine similarity and dissimilar ones to be far from each other in the vector space. Therefore, instead of the softmax, Additive Angular Margin Loss is the solution. The Arcface was first introduced in paper [ArcFace: Additive Angular Margin Loss for Deep Face Recognition](https://arxiv.org/pdf/1801.07698v3.pdf)[[1]](#1). It will add an angular margin penalty between the weights and input, so to force the distance between dissimilar classes to be longer. The figure below illustrates it (figure is from [[1]](#1)):
 
-<div style="text-align:center"><img src="arc_face.png" alt="prcess" class="center" height="500"></div>
+<div style="text-align:center"><img src="arc_face.png" alt="prcess" class="center"></div>
 
 The class `ArcMarginProduct` that was used in our solution was adapted from [ragnar's notebook](https://www.kaggle.com/rooben/img-baseline?scriptVersionId=63066660).
 
@@ -268,22 +268,85 @@ We can form a few hypotheses from all these results.
   - We used the wrong models
   - we didn't fine-tune BERT in the right way or for long enough
   
-## The Endgame
-* GMM- too many classes
-* PCA + whiten
-* improvement + strategy
+## Results
+
+Eventually, after finally getting more or less decent results with text and image embeddings, we concatenated them and optimised the threshold. In the following, we will give an imporvement timeline:
+
+<table class="tg center">
+<thead>
+  <tr>
+    <th class="tg-0pky">Strategy </th>
+    <th class="tg-0pky">Test mean F1-score </th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-btxf">baseline</td>
+    <td class="tg-btxf">0.458<br></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">BERT</td>
+    <td class="tg-0pky">0.487</td>
+  </tr>
+  <tr>
+    <td class="tg-btxf">BERT fine-tuned v1</td>
+    <td class="tg-btxf">0.495</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Phash </td>
+    <td class="tg-0pky">0.548</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">BERT fine-tuned v1 + Phash</td>
+    <td class="tg-0pky">0.580</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">BERT fine-tuned v2 + Phash </td>
+    <td class="tg-0pky">0.588</td>
+  </tr>
+    <tr>
+    <td class="tg-0pky">B0</td>
+    <td class="tg-0pky">0.648</td>
+  </tr>
+    <tr>
+    <td class="tg-0pky">B0 + PCA</td>
+    <td class="tg-0pky">0.653</td>
+  </tr>
+    <tr>
+    <td class="tg-0pky"><b>B0 + BERT fine-tuned v2 + Phash + PCA</b></td>
+    <td class="tg-0pky"><b>0.653</b></td>
+  </tr>
+    <tr>
+    <td class="tg-0pky">B3 fine-tuned v2 + PCA</td>
+    <td class="tg-0pky">0.665</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">B3 fine-tuned v2 + BERT fine-tuned v2 + Phash + PCA</td>
+    <td class="tg-0pky">0.680</td>
+  </tr>
+</tbody>
+</table>
+
+The bolded row was fixed as our final submission because we could not get the image fine-tuning to work properly before the deadline...
+
+In general we made 43 submissions and ranked 2012 out of 2426 teams which is not so bad result taking into account that we joined the competition close to merger.
 
 ## 3rd vs 1st place
 
 ## Discussion
 
-i.e what we learned and such
-* initially tried to face the challenge our own
-* helpful postis in the Kaggle community
-* Kaggle cannot be the bread and butter of a data scientist but is a perfect opportunity to know the latest trends in ML and learn something practical and new. Full hands on experience in ML.
-* got a chance to fine-tune
-* no internet
-* late joining
+The main discoveries:
+
+1. **Use batches!**
+2. **Internet is not necessary.** The competition did not allow internet connection in the notebook. Therefore, packages had to be installed straigt from the wheels!
+3. **Fine-tuning really works.** Although we might not did everything in the best way, fine-tuning still worked well and imporved our scores.
+4. 
+
+The main take-aways:
+
+1. **Read the Kaggle Discussion if you join the competition midway.** Initial idea was to do our own thing and more or less ignore all the hype in the discussions. It was good, we had a chance to think ourselves but at the same time- as the competition was soon ending- this would have helped us right on track much faster.
+2. **Kaggle cannot be the bread and butter of a data scientist but it is a perfect opportunity to know the latest trends in ML and learn something practical and new. Taking part of Kaggle competitions seems to be a perfect habit for a data scientist as it helps to keep the skillset up to date and might be inspiring for professional tasks as well.**
+
 
 ## References
 <a id="1">[1]</a> 
