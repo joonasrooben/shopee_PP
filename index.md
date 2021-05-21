@@ -298,6 +298,10 @@ Eventually, after finally getting more or less decent results with text and imag
     <td class="tg-0pky">Phash </td>
     <td class="tg-0pky">0.548</td>
   </tr>
+    <tr>
+    <td class="tg-0pky">TF-IDF + Phash</td>
+    <td class="tg-0pky">0.580</td>
+  </tr>
   <tr>
     <td class="tg-0pky">BERT fine-tuned v1 + Phash</td>
     <td class="tg-0pky">0.580</td>
@@ -329,7 +333,8 @@ Eventually, after finally getting more or less decent results with text and imag
 </tbody>
 </table>
 
-The bolded row was fixed as our final submission because we could not get the image fine-tuning to work properly before the deadline...
+ - The bolded row was fixed as our final submission because we could not get the image fine-tuning to work properly before the deadline...
+ - baseline approach is just literally matching each posting with itself.
 
 In general we made 43 submissions and ranked 2012 out of 2426 teams which is not so bad result taking into account that we joined the competition close to merger.
 
