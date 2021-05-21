@@ -88,7 +88,7 @@ The class `ArcMarginProduct` that was used in our solution was adapted from [rag
 
 <b><u>EfficientNetB3 and fine-tuning it</u></b>
 
-Fine-tuning the weights had to be tried out. We did it twice: first time we overfitted too much and the result did not improve. Second time, the stopping of the training was more on point and the results were impressive. The training was done using the ArcFace loss and was set up as a classification task with 11 014 classes.
+Fine-tuning the weights had to be tried out. We did it twice: first time we overfitted too much and the result did not improve. Second time, the stopping of the training was more on point and the results were impressive. The fine-tuning was done using the ArcFace loss and was set up as a classification task with 11 014 classes.
 
 <b><u>Results</u></b>
 
