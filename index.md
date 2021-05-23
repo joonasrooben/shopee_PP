@@ -168,6 +168,7 @@ So now you must be begging to know what task we fine-tuned BERT on. Well, we fin
 2. Fine tune it to distinguish between different products i.e two classify if two products belong to the same label group or not.
 
 We tried them both. The first one did not prove to do anything good in our set up. The second one was better. Here is an example of data that was fed into the BERT while fine-tuning:
+
 <table class="tg center">
 <thead>
   <tr>
