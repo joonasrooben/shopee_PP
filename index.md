@@ -163,7 +163,7 @@ So one approach to extracting description embeddings is to simply pass each desc
 
 Another but more interesting approach is to fine-tune BERT on our training data. Now the useful thing about PLMs is that they can be fine-tuned to any supervised learning task end-to-end. Meaning we can alter and hence "fine-tune" the pre-trained weights of BERT to teach BERT to be more accustomed to our data, to grasp a better understanding of the data at hand. BERT was pre-trained on wikipedia-like data and our data is messy descriptions: Theoretically, BERT alone won't understand the descriptions very well and won't get us optimal embeddings without fine-tuning.
 
-So now you must be begging to know what task we fine-tuned BERT on. Well, we fine-tuned the good old ´DistilBertForSequenceClassification´ with *"distilbert-base-uncased"* model. There is two obvious strategies:
+So now you must be begging to know what task we **fine-tuned BERT** on. Well, we fine-tuned the good old ´DistilBertForSequenceClassification´ with **"distilbert-base-uncased"** model. There is two obvious strategies:
 1. Fine tune it to classify between all the 11 014 classes
 2. Fine tune it to distinguish between different products i.e two classify if two products belong to the same label group or not.
 
@@ -181,19 +181,21 @@ We tried them both. The first one did not prove to do anything good in our set u
   <tr>
     <td class="tg-btxf">Paper Bag Victoria Secret</td>
     <td class="tg-btxf">PAPER BAG VICTORIA SECRET</td>
-    <th class="tg-0pky">True</th>
+    <td class="tg-btxf">True</td>
   </tr>
   <tr>
     <td class="tg-0pky">Paper Bag Victoria Secret</td>
     <td class="tg-0pky">Audio Splitter U Shape Male to Dual Female Jac...</td>
-    <th class="tg-0pky">False</th>
+    <td class="tg-0pky">False</td>
   </tr>
   <tr>
     <td class="tg-btxf">Paper Bag Victoria Secret</td>
-    <td class="tg-btxf"><b>HC KACA MATA ANTI RADIASI HC 6789 / KACAMATA K...</b></td>
-    <th class="tg-0pky">False</th>
+    <td class="tg-btxf">HC KACA MATA ANTI RADIASI HC 6789 / KACAMATA K...</td>
+    <td class="tg-btxf">False</td>
   </tr>
-  
+  </tbody>
+</table>
+
   This is a very apparent example but the major part of them are not so obvious at all. Some are not even in English. So, there could have been a try to combine different language BERT models.
 
 As mentioned we also try two other models: TF-IDF and Word2Vec. These two model do not take attention and context into account and are much smaller than BERT but nevertheless they still produce great results and are much more efficient (🚨#spoiler🚨 but Doc2Vec did the worst).
@@ -212,6 +214,7 @@ Doc2vec is another neural approach to embeddings. It is based of and (very) simi
 <br>
 
 Here is a summary of the mean F1 scores (on training data) for each textual model (<b>without</b> concatenation with image embeddings) using optimal threshold:
+
 
 
 <style type="text/css">
