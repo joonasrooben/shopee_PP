@@ -70,7 +70,7 @@ Let's get more precise now. We tried out two major image classification models:
 
 <b><u>EfficientNet</u></b>
 
-EfficientNet was first introduced by [Tan and Le, 2019](https://arxiv.org/abs/1905.11946) and is one of the most efficient models that reaches state-of-art accuracy on the *imagenet* tasks. We used the *Keras* implementation of EfficientNet.
+EfficientNet was first introduced by [Tan and Le, 2019](https://arxiv.org/abs/1905.11946)[[4]](#4) and is one of the most efficient models that reaches state-of-art accuracy on the *imagenet* tasks. We used the *Keras* implementation of EfficientNet.
 
 <div style="text-align:center"><img src="params.png" alt="prcess" class="center" height="500"></div>
 
@@ -453,6 +453,10 @@ The main take-aways:
 
 Thanks for reading! We hope you took away something!
 
+### Allocation of work
+
+* Dingley J. : Mainly dealt with text embeddings, EfficientNet fine-tuning, concatenation and blog
+* Järve J. : Mainly dealt with image embeddings, BERT fine-tuning and blog
 
 ## References
 <a id="1">[1]</a> 
@@ -464,5 +468,7 @@ Devlin, J., Chang, M.W., Lee, K., Toutanova, K. BERT: Pre-training of deep bidir
 <a id="3">[3]</a>
 Victor SANH, Lysandre DEBUT, Julien CHAUMOND, Thomas WOLF, DistilBERT, a distilled version of BERT: smaller,faster, cheaper and lighter, Hugging Face
     
+<a id="4">[4]</a> 
+Mingxing Tan and Quoc V. Le. (2019). EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks. abs/1905.11946. CoRR.
 
 
