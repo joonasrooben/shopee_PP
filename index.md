@@ -31,6 +31,16 @@ In untypical fashion, the test set is bigger than the train set, at around 60 00
 
 And of course in typical Kaggle fashion, the test set is hidden. Because otherwise we might be seeing scores close to 100% 😅 
 
+Here's an example of a posting's image and description
+
+<div style="text-align:center">
+  <figure>
+      <img src="infinix.png" alt="infinix" class="center" height="300">
+      <figcaption>INFINIX HOT 9 Play 2/32 & 3/64 & 4/64 GARANSI RESMI</figcaption>
+  </figure>
+</div>
+
+As we can see, not fun to work with these postings. What. A. Mess.
 
 ## Masterplan
 
