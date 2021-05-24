@@ -159,7 +159,7 @@ We won't cover each point extensively, but we'll explore in detail the most inte
 
 <b><u>BERT & fine-tuning BERT</u></b> 
 <br>
-Now some of you may not know what BERT is or what it can do so here's a brief overview of BERT-like models.
+Now some of you may not know what BERT [[2]](#2) is or what it can do so here's a brief overview of BERT-like models.
 
 BERT is a pre-trained language model (PLM) (or language representation model). PLMs are models trained in an unsupervised fashion on huge amounts of text by predicting masked words in sentences (and sometimes next sentence prediction - which is the case for BERT). These models learn to understand and represent language. A common architecture used today is the transformer architecture that uses the attention mechanism. As the model processes each word of the input sequence, attention allows the model to look at other words in the input sequence for clues that can help lead to a better encoding (or representation) for this word. The BERT architecture follows the following scheme (a stack of encoders- each encoder consisting of an attention mechanism layer a linear layer) [source](http://jalammar.github.io/illustrated-bert/)
 
@@ -171,7 +171,7 @@ So BERT takes as input a sequence and outputs:
 
 So one approach to extracting description embeddings is to simply pass each description through BERT and get an embedding (of length 768).
 
-Note that in our work we use **DistilBERT**, a distilled version of BERT that is smaller and more efficient than BERT whilst still retaining 95% of the performance of BERT. 
+Note that in our work we use **DistilBERT** [[3]](#3), a distilled version of BERT that is smaller and more efficient than BERT whilst still retaining 95% of the performance of BERT. 
 
 Another but more interesting approach is to fine-tune BERT on our training data. Now the useful thing about PLMs is that they can be fine-tuned to any supervised learning task end-to-end. Meaning we can alter and hence "fine-tune" the pre-trained weights of BERT to teach BERT to be more accustomed to our data, to grasp a better understanding of the data at hand. BERT was pre-trained on wikipedia-like data and our data is messy descriptions: Theoretically, BERT alone won't understand the descriptions very well and won't get us optimal embeddings without fine-tuning.
 
@@ -458,6 +458,11 @@ Thanks for reading! We hope you took away something!
 <a id="1">[1]</a> 
 Jiankang Deng and Jia Guo and Stefanos Zafeiriou. (2018). ArcFace: Additive Angular Margin Loss for Deep Face Recognition. abs/1801.07698. CoRR.
 
+<a id ="2">[2]</a>
+Devlin, J., Chang, M.W., Lee, K., Toutanova, K. BERT: Pre-training of deep bidirectionaltransformers for language understanding. In: Proceedings of the 2019 Conference of the NorthAmerican Chapter of the Association for Computational Linguistics: Human Language Tech-nologies, Volume 1 (Long and Short Papers), pp. 4171–4186. Association for ComputationalLinguistics, Minneapolis, Minnesota (2019)
 
+<a id="3">[3]</a>
+Victor SANH, Lysandre DEBUT, Julien CHAUMOND, Thomas WOLF, DistilBERT, a distilled version of BERT: smaller,faster, cheaper and lighter, Hugging Face
+    
 
 
