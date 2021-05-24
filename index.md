@@ -119,8 +119,8 @@ After all the different approaches and strategies with image embeddings, here is
     <td class="tg-0pky">67.5%</td>
   </tr>
   <tr>
-    <td class="tg-0pky">fine-tuned B3 + ArcFace + PCA</td>
-    <td class="tg-0pky">79%</td>
+    <td class="tg-btxf">fine-tuned B3 + ArcFace + PCA</td>
+    <td class="tg-btxf">79%</td>
   </tr>
   <tr>
     <td class="tg-0pky">fine-tuned v2 B3 + ArcFace + PCA</td>
@@ -161,13 +161,15 @@ So BERT takes as input a sequence and outputs:
 
 So one approach to extracting description embeddings is to simply pass each description through BERT and get an embedding (of length 768).
 
+Note that in our work we use **DistilBERT**, a distilled version of BERT that is smaller and more efficient than BERT whilst still retaining 95% of the performance of BERT. 
+
 Another but more interesting approach is to fine-tune BERT on our training data. Now the useful thing about PLMs is that they can be fine-tuned to any supervised learning task end-to-end. Meaning we can alter and hence "fine-tune" the pre-trained weights of BERT to teach BERT to be more accustomed to our data, to grasp a better understanding of the data at hand. BERT was pre-trained on wikipedia-like data and our data is messy descriptions: Theoretically, BERT alone won't understand the descriptions very well and won't get us optimal embeddings without fine-tuning.
 
-So now you must be begging to know what task we **fine-tuned BERT** on. Well, we fine-tuned the good old ´DistilBertForSequenceClassification´ with **"distilbert-base-uncased"** model. There is two obvious strategies:
+So now you must be begging to know what task we **fine-tuned BERT** on. Well, we fine-tuned DistilBERT (`distilbert-base-uncased` variant) using the good old `AutoModelForSequenceClassification` ([See HuggingFace's doc](https://huggingface.co/transformers/model_doc/distilbert.html#distilbertforsequenceclassification)). There are two obvious strategies:
 1. Fine tune it to classify between all the 11 014 classes
-2. Fine tune it to distinguish between different products i.e two classify if two products belong to the same label group or not.
+2. Fine tune it to distinguish between different products i.e to classify if two products belong to the same label group or not.
 
-We tried them both. The first one did not prove to do anything good in our set up. The second one was better. Here is an example of data that was fed into the BERT while fine-tuning:
+We tried them both. The first one did not prove to do anything good in our set up. The second one was better. Here is an example of data that was fed into BERT while fine-tuning:
 
 <table class="tg center">
 <thead>
@@ -196,7 +198,7 @@ We tried them both. The first one did not prove to do anything good in our set u
   </tbody>
 </table>
 
-  This is a very apparent example but the major part of them are not so obvious at all. Some are not even in English. So, there could have been a try to combine different language BERT models.
+  This is a very apparent example but the major part of them are not so obvious at all. Some are not even in English. So, there could maybe we could have tried to combine different language BERT models or tried a multilingual model.
 
 As mentioned we also try two other models: TF-IDF and Word2Vec. These two model do not take attention and context into account and are much smaller than BERT but nevertheless they still produce great results and are much more efficient (🚨#spoiler🚨 but Doc2Vec did the worst).
 
@@ -329,32 +331,32 @@ Eventually, after finally getting more or less decent results with text and imag
     <td class="tg-0pky">0.548</td>
   </tr>
     <tr>
-    <td class="tg-0pky">TF-IDF + Phash</td>
-    <td class="tg-0pky">0.580</td>
+    <td class="tg-btxf">TF-IDF + Phash</td>
+    <td class="tg-btxf">0.580</td>
   </tr>
   <tr>
     <td class="tg-0pky">BERT fine-tuned v1 + Phash</td>
     <td class="tg-0pky">0.580</td>
   </tr>
   <tr>
-    <td class="tg-0pky">BERT fine-tuned v2 + Phash </td>
-    <td class="tg-0pky">0.588</td>
+    <td class="tg-btxf">BERT fine-tuned v2 + Phash </td>
+    <td class="tg-btxf">0.588</td>
   </tr>
     <tr>
     <td class="tg-0pky">B0</td>
     <td class="tg-0pky">0.648</td>
   </tr>
     <tr>
-    <td class="tg-0pky">B0 + PCA</td>
-    <td class="tg-0pky">0.653</td>
+    <td class="tg-btxf">B0 + PCA</td>
+    <td class="tg-btxf">0.653</td>
   </tr>
     <tr>
     <td class="tg-0pky"><b>B0 + BERT fine-tuned v2 + Phash + PCA</b></td>
     <td class="tg-0pky"><b>0.653</b></td>
   </tr>
     <tr>
-    <td class="tg-0pky">B3 fine-tuned v2 + PCA</td>
-    <td class="tg-0pky">0.665</td>
+    <td class="tg-btxf">B3 fine-tuned v2 + PCA</td>
+    <td class="tg-btxf">0.665</td>
   </tr>
   <tr>
     <td class="tg-0pky">B3 fine-tuned v2 + BERT fine-tuned v2 + Phash + PCA</td>
@@ -401,16 +403,16 @@ As the competition ended and the winners published their solutions, we got to di
     <td class="tg-0pky"> 0.753</td>
   </tr>
   <tr>
-    <td class="tg-0pky">full data training</td>
-    <td class="tg-0pky">0.757</td>
+    <td class="tg-btxf">full data training</td>
+    <td class="tg-btxf">0.757</td>
   </tr>
   <tr>
     <td class="tg-0pky">union comb, img, txt matches + tune threshold</td>
     <td class="tg-0pky">0.776</td>
   </tr>
     <tr>
-    <td class="tg-0pky">INB + add diverse txt models</td>
-    <td class="tg-0pky">0.784</td>
+    <td class="tg-btxf">INB + add diverse txt models</td>
+    <td class="tg-btxf">0.784</td>
   </tr>
     <tr>
     <td class="tg-0pky">use img, txt, comb emb at INB stage 1 + tune threshold jointly</td>
